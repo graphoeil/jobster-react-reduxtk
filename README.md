@@ -1,6 +1,6 @@
 # Jobster
 
-Project in Action - [Jobster](https://app.netlify.com/sites/jobster-react-reduxtk/deploys)
+Project in Action - [Jobster](https://jobster-react-reduxtk.netlify.app/landing)
 
 #### React Course
 
