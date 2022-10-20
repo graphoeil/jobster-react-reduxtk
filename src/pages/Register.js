@@ -1,6 +1,5 @@
 // Imports
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
@@ -18,6 +17,13 @@ const initialState = {
 
 // Component
 const Register = () => {
+
+	// Autofocus on first input
+	const nameRef = useRef();
+	const emailRef = useRef();
+	useEffect(() => {
+		emailRef.current.focus();
+	},[]);
 
 	// Store
 	const { isLoading, user } = useSelector((store) => { return store.user });
@@ -61,6 +67,13 @@ const Register = () => {
 	};
 	const toggleMember = () => {
 		setValues({ ...values, isMember:!values.isMember });
+		setTimeout(() => {
+			if (!values.isMember){
+				emailRef.current.focus();
+			} else {
+				nameRef.current.focus();
+			}
+		}, 50);
 	};
 
 	// Return
@@ -75,14 +88,14 @@ const Register = () => {
 
 				{/* Name */}
 				{
-					!values.isMember && <FormRow type="text" name="name" value={ values.name } 
-					handleChange={ handleChange }/>
+					!values.isMember && <FormRow type="text" name="name" ref={ nameRef }
+					value={ values.name } handleChange={ handleChange }/>
 				}
 				{/* Name */}
 
 				{/* Email */}
-				<FormRow type="email" name="email" value={ values.email } 
-					handleChange={ handleChange }/>
+				<FormRow type="email" name="email" ref={ emailRef }
+					value={ values.email } handleChange={ handleChange }/>
 				{/* Email */}
 
 				{/* Password */}
